@@ -53,7 +53,7 @@ def test_spam_detection_legitimate(ai_service, sample_email):
     """Test spam detection for legitimate email"""
     is_spam = ai_service.detect_spam(sample_email)
     
-    assert is_spam == False
+    assert not is_spam
 
 
 def test_spam_detection_spam_email(ai_service):
@@ -70,7 +70,7 @@ def test_spam_detection_spam_email(ai_service):
     
     is_spam = ai_service.detect_spam(spam_email)
     
-    assert is_spam == True
+    assert is_spam
 
 
 def test_action_items_extraction(ai_service):

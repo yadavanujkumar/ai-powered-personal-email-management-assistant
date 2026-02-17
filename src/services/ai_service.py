@@ -151,8 +151,8 @@ class AIEmailService:
             return f"Email from {email.sender.email} regarding: {email.subject}"
         
         summary = ". ".join(summary_sentences) + "."
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
+        if len(summary) > 300:
+            summary = summary[:297] + "..."
         
         return summary
     

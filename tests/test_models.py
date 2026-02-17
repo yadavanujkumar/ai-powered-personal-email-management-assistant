@@ -47,7 +47,7 @@ def test_email_message_creation():
     
     assert email.id == "1"
     assert email.subject == "Test Subject"
-    assert email.is_read == False
+    assert not email.is_read
     assert email.folder == "inbox"
 
 
@@ -77,4 +77,4 @@ def test_email_config_creation():
     assert config.email_address == "test@gmail.com"
     assert config.imap_port == 993
     assert config.smtp_port == 587
-    assert config.use_ssl == True
+    assert config.use_ssl

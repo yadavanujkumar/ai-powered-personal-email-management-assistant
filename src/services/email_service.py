@@ -69,12 +69,12 @@ class EmailService:
         if self.imap_connection:
             try:
                 self.imap_connection.logout()
-            except:
+            except Exception:
                 pass
         if self.smtp_connection:
             try:
                 self.smtp_connection.quit()
-            except:
+            except Exception:
                 pass
     
     def fetch_emails(
@@ -101,7 +101,7 @@ class EmailService:
                 email_message = email.message_from_bytes(email_body)
                 
                 # Parse email
-                parsed_email = self._parse_email(email_message, num.decode())
+                parsed_email = self._parse_email(email_message, num.decode(), folder)
                 emails.append(parsed_email)
             
             return emails
@@ -109,7 +109,7 @@ class EmailService:
             logger.error(f"Failed to fetch emails: {e}")
             raise
     
-    def _parse_email(self, email_message, email_id: str) -> EmailMessage:
+    def _parse_email(self, email_message, email_id: str, folder: str = "inbox") -> EmailMessage:
         """Parse email message to EmailMessage model"""
         # Decode subject
         subject, encoding = decode_header(email_message["Subject"])[0]
@@ -128,7 +128,7 @@ class EmailService:
         date_str = email_message.get("Date", "")
         try:
             email_date = email.utils.parsedate_to_datetime(date_str)
-        except:
+        except Exception:
             email_date = datetime.now()
         
         # Get body
@@ -160,7 +160,7 @@ class EmailService:
         try:
             name, email_addr = email.utils.parseaddr(address_str)
             return EmailAddress(name=name if name else None, email=email_addr)
-        except:
+        except Exception:
             return EmailAddress(email=address_str)
     
     def send_email(
