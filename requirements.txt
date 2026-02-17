@@ -1,5 +1,5 @@
 # Core Framework
-fastapi==0.104.1
+fastapi==0.109.1
 uvicorn==0.24.0
 pydantic[email]==2.5.0
 
@@ -7,7 +7,7 @@ pydantic[email]==2.5.0
 python-dotenv==1.0.0
 
 # HTTP and middleware
-python-multipart==0.0.6
+python-multipart==0.0.22
 requests==2.31.0
 
 # Testing
