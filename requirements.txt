@@ -9,6 +9,7 @@ python-dotenv==1.0.0
 
 # HTTP and middleware
 python-multipart==0.0.6
+requests==2.31.0
 
 # Testing
 pytest==7.4.3
