@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  email-assistant:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - EMAIL_ADDRESS=${EMAIL_ADDRESS}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - IMAP_SERVER=${IMAP_SERVER:-imap.gmail.com}
+      - SMTP_SERVER=${SMTP_SERVER:-smtp.gmail.com}
+      - IMAP_PORT=${IMAP_PORT:-993}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - USE_SSL=${USE_SSL:-true}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
